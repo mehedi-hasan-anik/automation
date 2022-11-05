@@ -8,8 +8,9 @@ import "./App.css";
 import tableData from "./data/table.json";
 
 const App = () => {
-  const [rowData, setRowData] = useState(null);
   const gridRef: any = useRef();
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [rowData, setRowData] = useState(null);
   const [bookShow, setBookShow] = useState(false);
   const [priceShow, setPriceShow] = useState(false);
   const [returnShow, setReturnShow] = useState(false);
@@ -24,6 +25,19 @@ const App = () => {
   const [removingReturnedProduct, setRemovingReturnProduct] = useState(null);
   const [mileage, setMileage] = useState(null);
   const [reload, setReload] = useState(false);
+
+  console.log(
+    "date",
+    `${currentDate.getFullYear()}-${
+      currentDate.getMonth() <= 9
+        ? `0${currentDate.getMonth()}`
+        : currentDate.getMonth()
+    }-${
+      currentDate.getDate() <= 9
+        ? `0${currentDate.getDate()}`
+        : currentDate.getDate()
+    }`
+  );
 
   useEffect(() => {
     var date1 = new Date(fromDate);
@@ -261,6 +275,15 @@ const App = () => {
                   type="date"
                   id="From"
                   name="From"
+                  min={`${currentDate.getFullYear()}-${
+                    currentDate.getMonth() + 1 <= 9
+                      ? `0${currentDate.getMonth() + 1}`
+                      : currentDate.getMonth() + 1
+                  }-${
+                    currentDate.getDate() <= 9
+                      ? `0${currentDate.getDate()}`
+                      : currentDate.getDate()
+                  }`}
                   onChange={handleFromChange}
                 />
               </div>
@@ -271,6 +294,15 @@ const App = () => {
                   type="date"
                   id="To"
                   name="To"
+                  min={`${currentDate.getFullYear()}-${
+                    currentDate.getMonth() + 1 <= 9
+                      ? `0${currentDate.getMonth() + 1}`
+                      : currentDate.getMonth() + 1
+                  }-${
+                    currentDate.getDate() <= 9
+                      ? `0${currentDate.getDate()}`
+                      : currentDate.getDate()
+                  }`}
                   onChange={handleToChange}
                 />
               </div>
